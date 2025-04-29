@@ -2,13 +2,16 @@ package org.example.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "variants")
 @NoArgsConstructor
@@ -24,12 +27,12 @@ public class VariantEntity {
 
     private Boolean isTrue;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "question_id")
     private QuestionEntity question;
 
-    @ManyToMany
     @JsonIgnore
-    private List<AnswerEntity> answers;
+    @ManyToMany(mappedBy = "answers")
+    private Set<AnswerEntity> answers = new HashSet<>();
 }

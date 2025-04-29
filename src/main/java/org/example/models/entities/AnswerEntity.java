@@ -1,13 +1,15 @@
 package org.example.models.entities;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "answers")
 public class AnswerEntity {
@@ -20,13 +22,16 @@ public class AnswerEntity {
     @OneToOne
     private QuestionEntity question;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToOne
+    private AnswererEntity answerer;
+
+    @ManyToMany
     @JoinTable(
-            name = "variant_answer",
+            name = "variants_answers",
             joinColumns = @JoinColumn(name = "variant_id"),
             inverseJoinColumns = @JoinColumn(name = "answer_id")
     )
-    private List<VariantEntity> answers = new ArrayList<>();
+    private Set<VariantEntity> answers = new HashSet<>();
 
     private String answer;
 

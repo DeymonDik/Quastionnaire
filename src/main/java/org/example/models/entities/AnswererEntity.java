@@ -26,5 +26,9 @@ public class AnswererEntity {
 
     private String additional;
 
-    private LocalDateTime createDate;
+    private LocalDateTime createTime;
+
+//    @OneToMany(mappedBy = "answerer")
+//    @JoinColumn(name = "answerer")
+//    private List<AnswerEntity> answers = new ArrayList<>();
 }

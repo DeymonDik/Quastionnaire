@@ -22,6 +22,7 @@ public class QuestionService {
     }
 
     public QuestionEntity createQuestion(QuestionEntity question) {
+        question.getVariants().forEach(o->o.setQuestion(question));
         return questionRepository.save(question);
     }
 
